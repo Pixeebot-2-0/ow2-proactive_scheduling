@@ -25,6 +25,7 @@
  */
 package functionaltests.job.serialization;
 
+import static io.github.pixee.security.ObjectInputFilters.createSafeObjectInputStream;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -73,7 +74,7 @@ public class ClientJobStateSerializationTest {
         try {
             ByteArrayOutputStream output = new ByteArrayOutputStream();
             new ObjectOutputStream(output).writeObject(clientJobState);
-            deserializedClientJobState = (ClientJobState) new ObjectInputStream(new ByteArrayInputStream(output.toByteArray())).readObject();
+            deserializedClientJobState = (ClientJobState) createSafeObjectInputStream(new ByteArrayInputStream(output.toByteArray())).readObject();
         } catch (Exception e) {
             e.printStackTrace();
             fail("Serialization must not fail with exception. " + e.getMessage());

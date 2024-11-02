@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.scheduler.task.executors.forked.env;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.*;
 import java.security.Policy;
 
@@ -64,6 +65,7 @@ public class ExecuteForkedTaskInsideNewJvm {
             throw new IllegalStateException(CONTEXT_FILE + f + " exists but cannot be written");
         }
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(f))) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(inputStream);
             return (TaskContext) inputStream.readObject();
         } finally {
             deleteContextFile(f);

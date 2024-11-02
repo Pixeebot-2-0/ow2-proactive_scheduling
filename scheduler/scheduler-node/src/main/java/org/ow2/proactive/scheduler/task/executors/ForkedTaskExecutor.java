@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.scheduler.task.executors;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -156,6 +157,7 @@ public class ForkedTaskExecutor implements TaskExecutor {
     // 4 called by forker
     private Object deserializeTaskResult(File pathToFile) throws IOException, ClassNotFoundException {
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(pathToFile))) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(inputStream);
             return inputStream.readObject();
         } catch (IOException e) {
             throw new ForkedJvmProcessException("Could not read serialized task result (forked JVM may have been killed by the task or could not write to local space)",
