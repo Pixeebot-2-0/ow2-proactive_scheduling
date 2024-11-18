@@ -26,6 +26,7 @@
 package org.ow2.proactive_grid_cloud_portal.dataspace.util;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import io.github.pixee.security.ZipSecurity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -101,7 +102,7 @@ public class VFSZipper {
         public static void unzip(InputStream is, FileObject outfileObj) throws IOException {
             Closer closer = Closer.create();
             try {
-                ZipInputStream zis = new ZipInputStream(is);
+                ZipInputStream zis = ZipSecurity.createHardenedInputStream(is);
                 closer.register(zis);
                 ZipEntry zipEntry = zis.getNextEntry();
                 while (zipEntry != null) {
