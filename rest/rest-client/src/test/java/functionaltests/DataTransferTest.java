@@ -26,6 +26,7 @@
 package functionaltests;
 
 import static functionaltests.RestFuncTHelper.getRestServerUrl;
+import java.security.SecureRandom;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
 import static org.ow2.proactive.scheduler.rest.ds.IDataSpaceClient.Dataspace.USER;
@@ -707,7 +708,7 @@ public class DataTransferTest extends AbstractRestFuncTestCase {
 
     private byte[] randomFileContents() {
         byte[] fileContents = new byte[FILE_SIZE];
-        new Random().nextBytes(fileContents);
+        new SecureRandom().nextBytes(fileContents);
         return fileContents;
     }
 
