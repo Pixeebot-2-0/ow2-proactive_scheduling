@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.scheduler.common.job.factories;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.ow2.proactive.scheduler.common.SchedulerConstants.NEXT_EXECUTION;
 import static org.ow2.proactive.scheduler.common.SchedulerConstants.PARENT_JOB_ID;
 import static org.ow2.proactive.scheduler.common.job.Job.JOB_DDL;
@@ -1859,9 +1861,9 @@ public class StaxJobFactory extends JobFactory {
 
                             if (url != null) {
                                 if (language != null) {
-                                    toReturn = new SimpleScript(new URL(url), language, getArguments(cursorScript));
+                                    toReturn = new SimpleScript(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), language, getArguments(cursorScript));
                                 } else {
-                                    toReturn = new SimpleScript(new URL(url), getArguments(cursorScript));
+                                    toReturn = new SimpleScript(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), getArguments(cursorScript));
                                 }
                             } else if (path != null) {
                                 // language is ignored if a File is provided, the script language will be determined based on the file extension

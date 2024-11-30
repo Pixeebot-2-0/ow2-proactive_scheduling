@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.scheduler.common.job.factories.spi.model.factory;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -82,7 +84,7 @@ public class ModelFromURLParserValidator extends BaseParserValidator<String> {
             return new AcceptAllValidator<>();
         }
         try {
-            url = new URL(urlString);
+            url = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             String modelReceivedFromURL = null;
             if (url.getProtocol().equals("http") || url.getProtocol().equals("https")) {
                 CommonHttpResourceDownloader.UrlContent content = CommonHttpResourceDownloader.getInstance()

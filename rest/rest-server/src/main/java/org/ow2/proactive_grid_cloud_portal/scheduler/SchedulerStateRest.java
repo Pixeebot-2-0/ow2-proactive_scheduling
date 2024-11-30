@@ -26,6 +26,8 @@
 package org.ow2.proactive_grid_cloud_portal.scheduler;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 import static org.ow2.proactive.scheduler.common.SchedulerConstants.METADATA_CONTENT_TYPE;
 import static org.ow2.proactive.scheduler.common.SchedulerConstants.METADATA_FILE_EXTENSION;
@@ -3376,7 +3378,7 @@ public class SchedulerStateRest implements SchedulerRestInterface {
             HttpResourceDownloader httpResourceDownloader = HttpResourceDownloader.getInstance();
             downloadedWorkflow = httpResourceDownloader.getResource(sessionId, workflowUrl, String.class);
         } else {
-            URL nonHttpURL = new URL(workflowUrl);
+            URL nonHttpURL = Urls.create(workflowUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             downloadedWorkflow = IOUtils.toString(nonHttpURL.openStream(), Charsets.UTF_8);
         }
         if (downloadedWorkflow == null) {

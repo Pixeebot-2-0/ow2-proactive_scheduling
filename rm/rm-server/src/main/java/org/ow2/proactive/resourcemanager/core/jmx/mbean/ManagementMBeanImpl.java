@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.resourcemanager.core.jmx.mbean;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.Policy;
@@ -82,7 +84,7 @@ public final class ManagementMBeanImpl extends StandardMBean implements Manageme
         if (configFilename != null) {
             LogManager.resetConfiguration();
             try {
-                PropertyConfigurator.configure(new URL(configFilename));
+                PropertyConfigurator.configure(Urls.create(configFilename, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }

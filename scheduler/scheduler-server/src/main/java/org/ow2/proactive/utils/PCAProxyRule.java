@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.utils;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -115,7 +117,7 @@ public class PCAProxyRule extends Rule implements Rule.ApplyURI {
 
             URL refererUrl = null;
             try {
-                refererUrl = new URL(referer);
+                refererUrl = Urls.create(referer, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             } catch (Exception e) {
                 logger.warn("Invalid URL in referer : " + referer, e);
                 return target;

@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive_grid_cloud_portal.cli.cmd.sched;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.ow2.proactive_grid_cloud_portal.cli.CLIException.REASON_INVALID_ARGUMENTS;
 
 import java.io.File;
@@ -92,7 +94,7 @@ public class PackageDownloader {
         // Get the real URL in case it is a shortened one (via bit.ly, etc)
         URL url;
         try {
-            url = getRealURLIfForwarded(new URL(createNormalizeURL(packageUrl)));
+            url = getRealURLIfForwarded(Urls.create(createNormalizeURL(packageUrl), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
             checkReachableURL(url);
             if (isGithubURL(url.toString())) {
                 return downloadPackageFromGithub(url.toString());
@@ -187,7 +189,7 @@ public class PackageDownloader {
     private void downloadWebDirectory(URL dirUrl, File outputDir, Set<String> result) throws IOException {
         for (String relativeURL : result) {
             if (isFileURL(relativeURL)) {
-                URL absoluteUrl = new URL(dirUrl, relativeURL);
+                URL absoluteUrl = Urls.create(dirUrl, relativeURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                 FileUtils.copyURLToFile(absoluteUrl, new File(outputDir, relativeURL));
             }
         }
@@ -242,7 +244,7 @@ public class PackageDownloader {
         }
 
         for (String relativeURL : result) {
-            URL absoluteUrl = new URL(dirUrl, relativeURL);
+            URL absoluteUrl = Urls.create(dirUrl, relativeURL, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             if (!isFileURL(relativeURL)) {
                 result.addAll(listWebDirectoryContent(absoluteUrl, relativeURL));
             }
@@ -339,7 +341,7 @@ public class PackageDownloader {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setInstanceFollowRedirects(false);
         con.connect();
-        return con.getHeaderField("Location") != null ? new URL(con.getHeaderField("Location")) : url;
+        return con.getHeaderField("Location") != null ? Urls.create(con.getHeaderField("Location"), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS) : url;
     }
 
     /**

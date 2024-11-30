@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.scheduler.core.db;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -126,7 +128,7 @@ public class ScriptData {
     FlowScript createFlowScriptByURL() throws InvalidScriptException {
         URL inputUrl;
         try {
-            inputUrl = new URL(url);
+            inputUrl = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException e) {
             throw new InvalidScriptException(e);
         }
@@ -165,7 +167,7 @@ public class ScriptData {
     SimpleScript createSimpleScript() throws InvalidScriptException {
         if (script == null && url != null) {
             try {
-                return new SimpleScript(new URL(url), scriptEngine, parameters());
+                return new SimpleScript(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), scriptEngine, parameters());
             } catch (MalformedURLException e) {
                 throw new InvalidScriptException(e);
             }

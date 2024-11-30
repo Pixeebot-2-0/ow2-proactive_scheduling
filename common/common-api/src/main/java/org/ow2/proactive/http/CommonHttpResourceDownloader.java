@@ -26,6 +26,8 @@
 package org.ow2.proactive.http;
 
 import io.github.pixee.security.BoundedLineReader;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -96,7 +98,7 @@ public class CommonHttpResourceDownloader {
                 contentDispositionHeader.getValue().matches(CONTENT_DISPOSITIOB_REGEXP)) {
                 filename = contentDispositionHeader.getValue().replaceFirst(CONTENT_DISPOSITIOB_REGEXP, "$1");
             } else {
-                filename = FileUtils.getFileNameWithExtension(new URL(url));
+                filename = FileUtils.getFileNameWithExtension(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
             }
             return new UrlContent(readContent(response.getEntity().getContent()), filename);
         }
