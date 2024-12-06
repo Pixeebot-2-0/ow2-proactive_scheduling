@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.utils;
 
+import io.github.pixee.security.Newlines;
 import java.io.File;
 import java.io.IOException;
 import java.net.BindException;
@@ -374,36 +375,36 @@ public class JettyStarter {
                     throws IOException {
                 if (!target.contains("rm/portal/createnodesource")) {
                     if (!WebProperties.WEB_X_FRAME_OPTIONS.getValueAsString().isEmpty()) {
-                        response.setHeader("X-Frame-Options", WebProperties.WEB_X_FRAME_OPTIONS.getValueAsString());
+                        response.setHeader("X-Frame-Options", Newlines.stripAll(WebProperties.WEB_X_FRAME_OPTIONS.getValueAsString()));
                     }
                     if (!WebProperties.WEB_X_XSS_PROTECTION.getValueAsString().isEmpty()) {
-                        response.setHeader("X-XSS-Protection", WebProperties.WEB_X_XSS_PROTECTION.getValueAsString());
+                        response.setHeader("X-XSS-Protection", Newlines.stripAll(WebProperties.WEB_X_XSS_PROTECTION.getValueAsString()));
                     }
                     if (!WebProperties.WEB_X_CONTENT_TYPE_OPTIONS.getValueAsString().isEmpty()) {
                         response.setHeader("X-Content-Type-Options",
-                                           WebProperties.WEB_X_CONTENT_TYPE_OPTIONS.getValueAsString());
+                                           Newlines.stripAll(WebProperties.WEB_X_CONTENT_TYPE_OPTIONS.getValueAsString()));
                     }
                     if (WebProperties.WEB_HTTPS.getValueAsBoolean() &&
                         !WebProperties.WEB_STRICT_TRANSPORT_SECURITY.getValueAsString().isEmpty()) {
                         response.setHeader("Strict-Transport-Security",
-                                           WebProperties.WEB_STRICT_TRANSPORT_SECURITY.getValueAsString());
+                                           Newlines.stripAll(WebProperties.WEB_STRICT_TRANSPORT_SECURITY.getValueAsString()));
                     }
                     if (WebProperties.WEB_HTTPS.getValueAsBoolean() && WebProperties.WEB_EXPECT_CT.isSet() &&
                         !WebProperties.WEB_EXPECT_CT.getValueAsString().isEmpty()) {
-                        response.setHeader("Expect-CT", WebProperties.WEB_EXPECT_CT.getValueAsString());
+                        response.setHeader("Expect-CT", Newlines.stripAll(WebProperties.WEB_EXPECT_CT.getValueAsString()));
                     }
                     if (!WebProperties.WEB_REFERRER_POLICY.getValueAsString().isEmpty()) {
-                        response.setHeader("Referrer-Policy", WebProperties.WEB_REFERRER_POLICY.getValueAsString());
+                        response.setHeader("Referrer-Policy", Newlines.stripAll(WebProperties.WEB_REFERRER_POLICY.getValueAsString()));
                     }
                     if (WebProperties.WEB_CONTENT_SECURITY_POLICY.isSet() &&
                         !WebProperties.WEB_CONTENT_SECURITY_POLICY.getValueAsString().isEmpty()) {
                         response.setHeader("Content-Security-Policy",
-                                           WebProperties.WEB_CONTENT_SECURITY_POLICY.getValueAsString());
+                                           Newlines.stripAll(WebProperties.WEB_CONTENT_SECURITY_POLICY.getValueAsString()));
                     }
                     if (WebProperties.WEB_CONTENT_SECURITY_POLICY_REPORT_ONLY.isSet() &&
                         !WebProperties.WEB_CONTENT_SECURITY_POLICY_REPORT_ONLY.getValueAsString().isEmpty()) {
                         response.setHeader("Content-Security-Policy-Report-Only",
-                                           WebProperties.WEB_CONTENT_SECURITY_POLICY_REPORT_ONLY.getValueAsString());
+                                           Newlines.stripAll(WebProperties.WEB_CONTENT_SECURITY_POLICY_REPORT_ONLY.getValueAsString()));
                     }
                 }
                 return null;
