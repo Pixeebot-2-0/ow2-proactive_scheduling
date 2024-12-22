@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.scheduler.descriptor;
 
+import java.nio.file.Files;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -62,7 +63,7 @@ public class EligibleTaskDescriptorImplTest {
             latest = newTask;
         }
 
-        File tempFile = File.createTempFile("hello", ".tmp");
+        File tempFile = Files.createTempFile("hello", ".tmp").toFile();
 
         try (FileOutputStream file = new FileOutputStream(tempFile);
                 ObjectOutputStream out = new ObjectOutputStream(file)) {

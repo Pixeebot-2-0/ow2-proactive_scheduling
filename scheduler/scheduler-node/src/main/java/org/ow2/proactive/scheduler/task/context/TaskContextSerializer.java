@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 
 import org.ow2.proactive.scheduler.task.utils.ForkerUtils;
 
@@ -49,7 +50,7 @@ public class TaskContextSerializer implements Serializable {
         // prefix must be at least 3 characters long
         String tmpFilePrefix = Strings.padStart(context.getTaskId().value(), 3, '0');
 
-        File file = File.createTempFile(tmpFilePrefix, null, directory);
+        File file = Files.createTempFile(directory.toPath(), tmpFilePrefix, null).toFile();
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))) {
             objectOutputStream.writeObject(context);
         }

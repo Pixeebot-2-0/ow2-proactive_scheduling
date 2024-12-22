@@ -150,7 +150,7 @@ public class InProcessTaskExecutorTest extends ProActiveTestClean {
         initializer.setPostScript(new SimpleScript("println('post')", "groovy"));
 
         Map<String, String> genericInfo = new HashMap<>();
-        File file = File.createTempFile("test", ".py");
+        File file = Files.createTempFile("test", ".py").toFile();
         genericInfo.put("PRE_SCRIPT_AS_FILE", file.getAbsolutePath());
         file.delete();
         initializer.setGenericInformation(genericInfo);
@@ -234,7 +234,7 @@ public class InProcessTaskExecutorTest extends ProActiveTestClean {
         initializer.setPostScript(new SimpleScript("println('post')", "groovy"));
 
         Map<String, String> genericInfo = new HashMap<>();
-        File file = File.createTempFile("test", "");
+        File file = Files.createTempFile("test", "").toFile();
         genericInfo.put("PRE_SCRIPT_AS_FILE", file.getAbsolutePath());
         file.delete();
         initializer.setGenericInformation(genericInfo);

@@ -31,6 +31,7 @@ import io.github.pixee.security.SystemCommand;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.objectweb.proactive.core.node.Node;
@@ -93,7 +94,7 @@ public class CLIInfrastructure extends HostsFileBasedInfrastructureManager {
             try {
                 byte[] bytes = (byte[]) parameters[index++];
                 // putting .cmd as an extension so that it works on Windows
-                deploymentScript = File.createTempFile("deployment", ".cmd");
+                deploymentScript = Files.createTempFile("deployment", ".cmd").toFile();
                 FileToBytesConverter.convertByteArrayToFile(bytes, deploymentScript);
                 // deploymentScript.setExecutable(true);
             } catch (Exception e) {
@@ -103,7 +104,7 @@ public class CLIInfrastructure extends HostsFileBasedInfrastructureManager {
             try {
                 byte[] bytes = (byte[]) parameters[index++];
                 // putting .cmd as an extension so that it works on Windows
-                removalScript = File.createTempFile("removal", ".cmd");
+                removalScript = Files.createTempFile("removal", ".cmd").toFile();
                 FileToBytesConverter.convertByteArrayToFile(bytes, removalScript);
                 // removalScript.setExecutable(true);
             } catch (Exception e) {
