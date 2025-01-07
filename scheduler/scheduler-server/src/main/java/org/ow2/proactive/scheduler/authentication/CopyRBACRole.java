@@ -26,6 +26,7 @@
 package org.ow2.proactive.scheduler.authentication;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 import org.apache.commons.cli.*;
@@ -245,7 +246,7 @@ public class CopyRBACRole {
                                             " already exists and overwrite mode is not enabled.");
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(securityPolicyFile))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(securityPolicyFile.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
         if (roleOverwritten) {

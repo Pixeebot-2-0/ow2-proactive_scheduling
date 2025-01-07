@@ -27,6 +27,7 @@ package functionaltests.dataspaces;
 
 import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
+import java.nio.file.Files;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -70,7 +71,7 @@ public class TestWorkflowDataspace extends SchedulerFunctionalTestNoRestart {
             for (int dup = 0; dup < 3; dup++) {
                 File f = new File(inputSpace.getCanonicalPath() + File.separator + it + "_" + dup + ".in");
                 f.createNewFile();
-                BufferedWriter out = new BufferedWriter(new FileWriter(f));
+                BufferedWriter out = Files.newBufferedWriter(f.toPath());
                 out.write("it " + it + " dup " + dup + "\n");
                 out.close();
             }

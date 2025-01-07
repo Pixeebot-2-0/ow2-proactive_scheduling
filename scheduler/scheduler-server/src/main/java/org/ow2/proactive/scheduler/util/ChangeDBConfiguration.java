@@ -27,6 +27,7 @@ package org.ow2.proactive.scheduler.util;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -706,7 +707,7 @@ public class ChangeDBConfiguration {
         for (String line : inputLines) {
             outputLines.add(analyseLineInMainHsqldbFile(line));
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(propertiesFile))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(propertiesFile.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
     }
@@ -726,7 +727,7 @@ public class ChangeDBConfiguration {
         for (String line : inputLines) {
             outputLines.add(analyseLineInPropertiesFile(line));
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(propertiesFile))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(propertiesFile.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
     }

@@ -28,6 +28,7 @@ package org.ow2.proactive.scheduler.util;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -461,7 +462,7 @@ public class ChangeHttpConfiguration {
         for (String line : inputLines) {
             outputLines.add(analyseLineInWebPropertiesFile(line));
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(webPropertiesFile))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(webPropertiesFile.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
     }
@@ -482,7 +483,7 @@ public class ChangeHttpConfiguration {
         for (String line : inputLines) {
             outputLines.add(analyseLineInSchedulerPropertiesFile(line));
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(schedPropertiesFile))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(schedPropertiesFile.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
     }
@@ -518,7 +519,7 @@ public class ChangeHttpConfiguration {
         for (String line : inputLines) {
             outputLines.add(analyseLineInApplicationPropertiesFile(line, hostname));
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(applicationPropertiesFile))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(applicationPropertiesFile.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
     }

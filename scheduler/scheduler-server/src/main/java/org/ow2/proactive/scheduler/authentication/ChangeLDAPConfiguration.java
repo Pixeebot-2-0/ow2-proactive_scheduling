@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.scheduler.authentication;
 
+import java.nio.file.Files;
 import static org.ow2.proactive.authentication.LDAPProperties.*;
 import static org.ow2.proactive.core.properties.PropertyDecrypter.ENCRYPTION_PREFIX;
 
@@ -696,7 +697,7 @@ public class ChangeLDAPConfiguration {
         for (String line : inputLines) {
             outputLines.add(analyseLineInLdapConfiguration(line));
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ldapConfiguration))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(ldapConfiguration.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
     }
@@ -773,7 +774,7 @@ public class ChangeLDAPConfiguration {
         for (String line : inputLines) {
             outputLines.add(analyseLineInSettings(line));
         }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(settingsConfiguration))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(settingsConfiguration.toPath())) {
             IOUtils.writeLines(outputLines, null, writer);
         }
     }

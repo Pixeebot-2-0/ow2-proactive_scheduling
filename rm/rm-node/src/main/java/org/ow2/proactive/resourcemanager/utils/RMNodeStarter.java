@@ -26,6 +26,7 @@
 package org.ow2.proactive.resourcemanager.utils;
 
 import io.github.pixee.security.BoundedLineReader;
+import java.nio.file.Files;
 import static org.ow2.proactive.utils.ClasspathUtils.findSchedulerHome;
 
 import java.io.BufferedReader;
@@ -1416,7 +1417,7 @@ public class RMNodeStarter {
                 logger.warn("NodeURL file already exists ; delete it.");
                 FileUtils.forceDelete(f);
             }
-            try (BufferedWriter out = new BufferedWriter(new FileWriter(f))) {
+            try (BufferedWriter out = Files.newBufferedWriter(f.toPath())) {
                 out.write(nodeURL);
                 out.write(System.lineSeparator());
             }

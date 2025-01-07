@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.resourcemanager.selection.policies;
 
+import java.nio.file.Files;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -63,7 +64,7 @@ public class TestNodeSourcePolicy {
          * Creating a config with ns names 0, 1, 2, 3, ... 9
          */
         File config = tmpFolder.newFile("policies");
-        BufferedWriter out = new BufferedWriter(new FileWriter(config));
+        BufferedWriter out = Files.newBufferedWriter(config.toPath());
         for (int i = 0; i < 10; i++) {
             out.write(i + "\n");
         }
