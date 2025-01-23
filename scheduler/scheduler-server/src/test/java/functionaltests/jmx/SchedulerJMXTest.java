@@ -90,14 +90,14 @@ public final class SchedulerJMXTest extends SchedulerFunctionalTestNoRestart {
 
         {
             RMTHelper.log("Test jmxRmiServiceURL is well formed");
-            assertTrue("The jmxRmiServiceURL protocol must be rmi", jmxRmiServiceURL.getProtocol().equals("rmi"));
+            assertTrue("The jmxRmiServiceURL protocol must be rmi", "rmi".equals(jmxRmiServiceURL.getProtocol()));
             assertTrue("The jmxRmiServiceURL URLPath must end with " + suffix,
                        jmxRmiServiceURL.getURLPath().endsWith(suffix));
         }
 
         {
             RMTHelper.log("Test jmxRoServiceURL is well formed");
-            assertTrue("The jmxRoServiceURL protocol must be ro", jmxRoServiceURL.getProtocol().equals("ro"));
+            assertTrue("The jmxRoServiceURL protocol must be ro", "ro".equals(jmxRoServiceURL.getProtocol()));
             assertTrue("The jmxRoServiceURL URLPath must end with " + suffix,
                        jmxRoServiceURL.getURLPath().endsWith(suffix));
         }

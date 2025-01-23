@@ -50,7 +50,7 @@ public class LiveLogCommand extends AbstractJobCommand {
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.submit(reader);
             String line = readLine(currentContext, "> ");
-            while (Strings.isNullOrEmpty(line) || !line.trim().equals("q")) {
+            while (Strings.isNullOrEmpty(line) || !"q".equals(line.trim())) {
                 line = readLine(currentContext, "> ");
             }
             reader.terminate();

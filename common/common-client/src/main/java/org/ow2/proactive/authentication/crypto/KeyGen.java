@@ -60,7 +60,7 @@ public class KeyGen {
          */
         int index = 0;
         while (index < args.length) {
-            if (args[index].equals("--size") || args[index].equals("-s")) {
+            if ("--size".equals(args[index]) || "-s".equals(args[index])) {
                 if (++index == args.length) {
                     printError("No value provided for option --size");
                     printUsage(algo, size);
@@ -68,7 +68,7 @@ public class KeyGen {
                 }
                 size = Integer.parseInt(args[index]);
             }
-            if (args[index].equals("--private") || args[index].equals("-p")) {
+            if ("--private".equals(args[index]) || "-p".equals(args[index])) {
                 if (++index == args.length) {
                     printError("No value provided for argument --private");
                     printUsage(algo, size);
@@ -77,7 +77,7 @@ public class KeyGen {
                 privKey = args[index];
 
             }
-            if (args[index].equals("--public") || args[index].equals("-P")) {
+            if ("--public".equals(args[index]) || "-P".equals(args[index])) {
                 if (++index == args.length) {
                     printError("No value provided for argument --public");
                     printUsage(algo, size);
@@ -85,7 +85,7 @@ public class KeyGen {
                 }
                 pubKey = args[index];
             }
-            if (args[index].equals("--algo") || args[index].equals("-a")) {
+            if ("--algo".equals(args[index]) || "-a".equals(args[index])) {
                 if (++index == args.length) {
                     printError("No value provided for option --algo");
                     printUsage(algo, size);
@@ -93,7 +93,7 @@ public class KeyGen {
                 }
                 algo = args[index];
             }
-            if (args[index].equals("--help") || args[index].equals("-h")) {
+            if ("--help".equals(args[index]) || "-h".equals(args[index])) {
                 printUsage(algo, size);
                 return;
             }

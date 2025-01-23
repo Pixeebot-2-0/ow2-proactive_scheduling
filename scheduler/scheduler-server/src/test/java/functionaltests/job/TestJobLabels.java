@@ -61,10 +61,10 @@ public class TestJobLabels extends SchedulerFunctionalTestNoRestart {
         java.util.List<JobLabelInfo> jobLabelInfoList = schedulerHelper.createLabels(labels);
         assertEquals(2, jobLabelInfoList.size());
         assertNotNull(jobLabelInfoList.stream()
-                                      .filter(jobLabelInfo -> jobLabelInfo.getLabel().equals("label1"))
+                                      .filter(jobLabelInfo -> "label1".equals(jobLabelInfo.getLabel()))
                                       .collect(Collectors.toList()));
         assertNotNull(jobLabelInfoList.stream()
-                                      .filter(jobLabelInfo -> jobLabelInfo.getLabel().equals("label2"))
+                                      .filter(jobLabelInfo -> "label2".equals(jobLabelInfo.getLabel()))
                                       .collect(Collectors.toList()));
 
         log("Update label newLabel");
@@ -82,10 +82,10 @@ public class TestJobLabels extends SchedulerFunctionalTestNoRestart {
         java.util.List<JobLabelInfo> updatedJobLabels = schedulerHelper.setLabels(updatedLabels);
         assertEquals(2, updatedJobLabels.size());
         assertNotNull(updatedJobLabels.stream()
-                                      .filter(jobLabel -> jobLabel.getLabel().equals("newLabel1"))
+                                      .filter(jobLabel -> "newLabel1".equals(jobLabel.getLabel()))
                                       .collect(Collectors.toList()));
         assertNotNull(updatedJobLabels.stream()
-                                      .filter(jobLabel -> jobLabel.getLabel().equals("newLabel2"))
+                                      .filter(jobLabel -> "newLabel2".equals(jobLabel.getLabel()))
                                       .collect(Collectors.toList()));
 
         log("Set label newLabel1 on job");

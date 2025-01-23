@@ -87,7 +87,7 @@ public class SocketWithSSHTunnelBasedForwardingProvider extends SocketBasedForwa
         public Appender getAppender() throws LogForwardingException {
             // resolve username locally: use ProActive defined username, or current username if any
             String sshUserName = CentralPAPropertyRepository.PA_RMISSH_REMOTE_USERNAME.getValue();
-            if ((sshUserName == null) || sshUserName.equals("")) {
+            if ((sshUserName == null) || "".equals(sshUserName)) {
                 sshUserName = System.getProperty("user.name");
             }
             try {

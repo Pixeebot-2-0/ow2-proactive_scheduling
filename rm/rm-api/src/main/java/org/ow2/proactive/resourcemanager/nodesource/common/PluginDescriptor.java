@@ -285,7 +285,7 @@ public class PluginDescriptor implements Serializable {
             for (ConfigurableField field : configurableFields) {
                 params += field.getName();
                 //we add a default value
-                if (!field.getValue().equals("")) {
+                if (!"".equals(field.getValue())) {
                     params += "[" + field.getValue() + "]";
                 }
                 params += " ";

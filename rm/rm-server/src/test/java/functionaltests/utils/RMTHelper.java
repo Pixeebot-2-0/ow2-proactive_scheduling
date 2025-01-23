@@ -572,7 +572,7 @@ public class RMTHelper {
         }
 
         for (Entry<String, String> entry : vmParameters.entrySet()) {
-            if (!entry.getKey().equals("") && !entry.getValue().equals("")) {
+            if (!"".equals(entry.getKey()) && !"".equals(entry.getValue())) {
                 jvmParameters.add("-D" + entry.getKey() + "=" + entry.getValue());
             }
         }

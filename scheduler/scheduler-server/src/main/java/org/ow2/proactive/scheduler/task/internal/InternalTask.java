@@ -1418,7 +1418,7 @@ public abstract class InternalTask extends TaskState {
     }
 
     private long resolveWallTime(String configuredWalltime, String errorMessage) {
-        if (configuredWalltime == null || configuredWalltime.isEmpty() || configuredWalltime.trim().equals("0")) {
+        if (configuredWalltime == null || configuredWalltime.isEmpty() || "0".equals(configuredWalltime.trim())) {
             return 0;
         }
         long resolvedWalltime = Tools.formatDate(configuredWalltime);

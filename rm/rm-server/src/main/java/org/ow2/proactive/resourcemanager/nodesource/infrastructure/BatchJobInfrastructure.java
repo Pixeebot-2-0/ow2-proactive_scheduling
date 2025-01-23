@@ -473,7 +473,7 @@ public abstract class BatchJobInfrastructure extends InfrastructureManager {
 
             int index = 0;
             this.javaPath = parameters[index++].toString();
-            if (this.javaPath == null || this.javaPath.equals("")) {
+            if (this.javaPath == null || "".equals(this.javaPath)) {
                 this.javaPath = "java";
             }
             this.sshOptions = parameters[index++].toString();

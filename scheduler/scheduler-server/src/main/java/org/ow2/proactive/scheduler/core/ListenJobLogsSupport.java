@@ -54,7 +54,7 @@ public abstract class ListenJobLogsSupport {
     public static ListenJobLogsSupport newInstance(SchedulerDBManager dbManager, LiveJobs liveJobs)
             throws LogForwardingException {
         String providerClassname = PASchedulerProperties.LOGS_FORWARDING_PROVIDER.getValueAsString();
-        if (providerClassname == null || providerClassname.equals("")) {
+        if (providerClassname == null || "".equals(providerClassname)) {
             logger.info("LogForwardingProvider property is not set, disabling listen job logs support");
             return new DisabledListenJobLogsSupport();
         } else {

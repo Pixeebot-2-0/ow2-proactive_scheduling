@@ -199,7 +199,7 @@ public class SchedulerClientTest extends AbstractRestFuncTestCase {
         Assert.assertFalse(signals.contains("ready_my_signal"));
         Assert.assertTrue(signals.contains("my_signal"));
         JobVariable nameJobVariable = jobVariables.stream()
-                                                  .filter(jobVariable -> jobVariable.getName().equals("name"))
+                                                  .filter(jobVariable -> "name".equals(jobVariable.getName()))
                                                   .findFirst()
                                                   .get();
 
@@ -207,7 +207,7 @@ public class SchedulerClientTest extends AbstractRestFuncTestCase {
         Assert.assertEquals("15", nameJobVariable.getValue());
         Assert.assertEquals("PA:Integer", nameJobVariable.getModel());
         JobVariable secondJobVariable = jobVariables.stream()
-                                                    .filter(jobVariable -> jobVariable.getName().equals("second"))
+                                                    .filter(jobVariable -> "second".equals(jobVariable.getName()))
                                                     .findFirst()
                                                     .get();
 

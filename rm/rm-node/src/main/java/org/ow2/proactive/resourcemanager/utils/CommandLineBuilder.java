@@ -100,7 +100,7 @@ public final class CommandLineBuilder implements Cloneable {
             if (paPropProperties != null) {
                 String rmHome;
                 if (paPropProperties.getProperty(PAResourceManagerProperties.RM_HOME.getKey()) != null &&
-                    !paPropProperties.getProperty(PAResourceManagerProperties.RM_HOME.getKey()).equals("")) {
+                    !"".equals(paPropProperties.getProperty(PAResourceManagerProperties.RM_HOME.getKey()))) {
                     rmHome = paPropProperties.getProperty(PAResourceManagerProperties.RM_HOME.getKey());
                     if (!rmHome.endsWith(String.valueOf(this.targetOS.fs))) {
                         rmHome += String.valueOf(this.targetOS.fs);
@@ -215,7 +215,7 @@ public final class CommandLineBuilder implements Cloneable {
             if (this.credentialsEnv == null && this.credentialsValue == null) {
                 String paRMKey = PAResourceManagerProperties.RM_CREDS.getKey();
                 if (paPropProperties != null && paPropProperties.getProperty(paRMKey) != null &&
-                    !paPropProperties.getProperty(paRMKey).equals("")) {
+                    !"".equals(paPropProperties.getProperty(paRMKey))) {
                     RMNodeStarter.logger.trace(paRMKey + " property retrieved from PA properties supplied by " +
                                                CommandLineBuilder.class.getName());
                     return paPropProperties.getProperty(paRMKey);

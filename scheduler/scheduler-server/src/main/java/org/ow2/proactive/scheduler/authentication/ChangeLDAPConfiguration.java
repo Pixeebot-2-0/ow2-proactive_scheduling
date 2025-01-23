@@ -646,7 +646,7 @@ public class ChangeLDAPConfiguration {
                 String serverScheme = serverUri.getScheme();
                 String serverHost = serverUri.getHost();
                 int serverPort = serverUri.getPort();
-                if (serverPort == -1 && serverScheme.equals("ldaps")) {
+                if (serverPort == -1 && "ldaps".equals(serverScheme)) {
                     serverPort = 636;
                 } else {
                     serverPort = 389;

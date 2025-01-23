@@ -64,7 +64,7 @@ public class WorkingAt3rd extends JavaExecutable {
             PrintWriter pw = new PrintWriter(f);
             pw.write("" + (n + 1));
             pw.close();
-            if (prefix.equals("WorkingAt3rdT2_")) {
+            if ("WorkingAt3rdT2_".equals(prefix)) {
                 boolean b = f.delete();
                 throw new RuntimeException("WorkingAt3rd - Status : Number is " + n + " File deleted : " + b);
             } else {

@@ -158,8 +158,8 @@ public class SubmitJobCommand extends AbstractCommand implements Command {
     private Boolean isValidFileMimeType(String pathname) {
         String contentType = URLConnection.getFileNameMap().getContentTypeFor(pathname);
         if (contentType != null)
-            return (contentType.toLowerCase().equals("application/xml") ||
-                    contentType.toLowerCase().equals("application/zip"));
+            return ("application/xml".equals(contentType.toLowerCase()) ||
+                    "application/zip".equals(contentType.toLowerCase()));
         return false;
     }
 

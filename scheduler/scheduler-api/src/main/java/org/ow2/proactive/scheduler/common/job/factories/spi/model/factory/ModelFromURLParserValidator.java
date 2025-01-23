@@ -84,7 +84,7 @@ public class ModelFromURLParserValidator extends BaseParserValidator<String> {
         try {
             url = new URL(urlString);
             String modelReceivedFromURL = null;
-            if (url.getProtocol().equals("http") || url.getProtocol().equals("https")) {
+            if ("http".equals(url.getProtocol()) || "https".equals(url.getProtocol())) {
                 CommonHttpResourceDownloader.UrlContent content = CommonHttpResourceDownloader.getInstance()
                                                                                               .getResourceContent(null,
                                                                                                                   url.toExternalForm(),

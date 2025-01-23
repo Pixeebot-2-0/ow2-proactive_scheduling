@@ -322,7 +322,7 @@ public class TaskProActiveDataspaces implements TaskDataspaces {
             throw new IllegalStateException(e);
         }
         String answer;
-        if (foUri.getScheme() == null || foUri.getScheme().equals("file")) {
+        if (foUri.getScheme() == null || "file".equals(foUri.getScheme())) {
             answer = (new File(foUri)).getAbsolutePath();
         } else {
             if (errorIfNotFile) {

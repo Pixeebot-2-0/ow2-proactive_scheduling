@@ -142,7 +142,7 @@ public abstract class AuthenticationImpl implements Authentication, RunActive {
         String password = credentials.getPassword();
         String domain = credentials.getDomain();
 
-        if (username == null || username.equals("")) {
+        if (username == null || "".equals(username)) {
             throw new LoginException("Bad user name (user is null or empty)");
         }
 

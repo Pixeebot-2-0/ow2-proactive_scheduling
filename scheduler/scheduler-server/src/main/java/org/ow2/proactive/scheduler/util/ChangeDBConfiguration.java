@@ -337,11 +337,11 @@ public class ChangeDBConfiguration {
         }
 
         if (cmd.hasOption(SCHEMA_OPTION_NAME)) {
-            if (component.equals(ALL_COMPONENTS)) {
+            if (ALL_COMPONENTS.equals(component)) {
                 exitWithErrorMessage("--" + SCHEMA_OPTION_NAME + " cannot be used when --" + COMPONENT_OPTION_NAME +
                                      "=" + ALL_COMPONENTS, null, null);
             }
-            if (vendor.equals(HSQLDB)) {
+            if (HSQLDB.equals(vendor)) {
                 exitWithErrorMessage("--" + SCHEMA_OPTION_NAME + " cannot be used when --" + DB_VENDOR_OPTION_NAME +
                                      "=" + HSQLDB, null, null);
             }
@@ -349,7 +349,7 @@ public class ChangeDBConfiguration {
         }
 
         if (cmd.hasOption(URL_OPTION_NAME)) {
-            if (component.equals(ALL_COMPONENTS)) {
+            if (ALL_COMPONENTS.equals(component)) {
                 exitWithErrorMessage("--" + URL_OPTION_NAME + " cannot be used when --" + COMPONENT_OPTION_NAME + "=" +
                                      ALL_COMPONENTS, null, null);
             }
@@ -399,7 +399,7 @@ public class ChangeDBConfiguration {
                 if (portValue < 0 || portValue > 65353) {
                     throw new IllegalArgumentException();
                 }
-                if (portValue < 1024 && vendor.equals(HSQLDB)) {
+                if (portValue < 1024 && HSQLDB.equals(vendor)) {
                     System.err.println("WARN: port range from 0 to 1023 are accessible only to privileged users. Using it within ProActive require additional operating system configuration.");
                 }
             } catch (Exception e) {
@@ -435,12 +435,12 @@ public class ChangeDBConfiguration {
             // configuration specific to HSQLDB
             log("WARN: HSQLDB does not support password changing once the database has been created.");
             log("WARN: if you provided a different password from the one that was used before, you need to delete the previous database in data/db/" +
-                (component.equals(ALL_COMPONENTS) ? defaultSchemaNames.values() : defaultSchemaNames.get(component)));
+                (ALL_COMPONENTS.equals(component) ? defaultSchemaNames.values() : defaultSchemaNames.get(component)));
             changeMainHsqlDbProperties(getSchedulerFile(MAIN_HSQLDB_CONFIGURATION));
         }
 
         List<String> componentsToConfigure = new ArrayList<>();
-        if (component.equals(ALL_COMPONENTS)) {
+        if (ALL_COMPONENTS.equals(component)) {
             log("NOTE: when using --" + COMPONENT_OPTION_NAME + "=" + ALL_COMPONENTS +
                 ", the same username/password configuration will be applied to all components");
             componentsToConfigure.addAll(services);
@@ -449,8 +449,8 @@ public class ChangeDBConfiguration {
         }
 
         for (String currentComponent : componentsToConfigure) {
-            if (url == null || component.equals(ALL_COMPONENTS)) {
-                if (vendor.equals(MYSQL)) {
+            if (url == null || ALL_COMPONENTS.equals(component)) {
+                if (MYSQL.equals(vendor)) {
                     url = String.format(vendorsUrls.get(vendor),
                                         hostname,
                                         port,

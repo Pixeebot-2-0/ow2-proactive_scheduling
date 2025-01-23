@@ -73,7 +73,7 @@ public class SchedulerClientExample {
         while (true) {
             JobStateData jobState2 = scheduler.listJobs(sessionId, Long.toString(flatJob.getId()));
             System.out.println(jobState2);
-            if (jobState2.getJobInfo().getStatus().name().equals("FINISHED")) {
+            if ("FINISHED".equals(jobState2.getJobInfo().getStatus().name())) {
                 break;
             }
             Thread.sleep(100);

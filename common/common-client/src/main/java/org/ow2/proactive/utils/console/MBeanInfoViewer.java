@@ -401,9 +401,9 @@ public final class MBeanInfoViewer {
         if (type == null)
             return false;
 
-        if (type.equals("boolean") || type.equals("byte") || type.equals("character") || type.equals("short") ||
-            type.equals("int") || type.equals("integer") || type.equals("long") || type.equals("float") ||
-            type.equals("double")) {
+        if ("boolean".equals(type) || "byte".equals(type) || "character".equals(type) || "short".equals(type) ||
+            "int".equals(type) || "integer".equals(type) || "long".equals(type) || "float".equals(type) ||
+            "double".equals(type)) {
             return true;
         }
 

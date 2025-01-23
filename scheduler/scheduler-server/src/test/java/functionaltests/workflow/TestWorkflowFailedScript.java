@@ -100,14 +100,14 @@ public class TestWorkflowFailedScript extends TRepJobs {
         Assert.assertTrue("Expected 2 results, got " + results.size(), results.size() == 2);
 
         for (Entry<String, TaskResult> result : results.entrySet()) {
-            if (result.getKey().equals("A")) {
+            if ("A".equals(result.getKey())) {
                 // A should produce an exception
                 Assert.assertTrue("Task " + result.getKey() + " should have had an exception!",
                                   result.getValue().hadException());
             } else {
                 // task should be B and not C
                 Assert.assertTrue("Expected result for task B, got task " + result.getKey(),
-                                  result.getKey().equals("B"));
+                                  "B".equals(result.getKey()));
 
                 // Task B should run without exception
                 Assert.assertFalse("Task " + result.getKey() + " had an exception!", result.getValue().hadException());

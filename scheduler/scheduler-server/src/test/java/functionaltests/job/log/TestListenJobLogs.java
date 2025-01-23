@@ -111,7 +111,7 @@ public class TestListenJobLogs extends SchedulerFunctionalTestWithCustomConfigAn
                     Thread.sleep(1000);
                     continue;
                 }
-                if (command.equals("stop")) {
+                if ("stop".equals(command)) {
                     break;
                 } else if (command.startsWith("output")) {
                     getOut().println(command);

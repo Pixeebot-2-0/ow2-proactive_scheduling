@@ -499,19 +499,19 @@ public class TaskData {
         if (topologyDescriptor == null) {
             return null;
         }
-        if (topologyDescriptor.equals("ARBITRARY")) {
+        if ("ARBITRARY".equals(topologyDescriptor)) {
             return TopologyDescriptor.ARBITRARY;
-        } else if (topologyDescriptor.equals("BEST_PROXIMITY")) {
+        } else if ("BEST_PROXIMITY".equals(topologyDescriptor)) {
             return TopologyDescriptor.BEST_PROXIMITY;
-        } else if (topologyDescriptor.equals("SINGLE_HOST")) {
+        } else if ("SINGLE_HOST".equals(topologyDescriptor)) {
             return TopologyDescriptor.SINGLE_HOST;
-        } else if (topologyDescriptor.equals("SINGLE_HOST_EXCLUSIVE")) {
+        } else if ("SINGLE_HOST_EXCLUSIVE".equals(topologyDescriptor)) {
             return TopologyDescriptor.SINGLE_HOST_EXCLUSIVE;
-        } else if (topologyDescriptor.equals("MULTIPLE_HOSTS_EXCLUSIVE")) {
+        } else if ("MULTIPLE_HOSTS_EXCLUSIVE".equals(topologyDescriptor)) {
             return TopologyDescriptor.MULTIPLE_HOSTS_EXCLUSIVE;
-        } else if (topologyDescriptor.equals("DIFFERENT_HOSTS_EXCLUSIVE")) {
+        } else if ("DIFFERENT_HOSTS_EXCLUSIVE".equals(topologyDescriptor)) {
             return TopologyDescriptor.DIFFERENT_HOSTS_EXCLUSIVE;
-        } else if (topologyDescriptor.equals("THRESHOLD")) {
+        } else if ("THRESHOLD".equals(topologyDescriptor)) {
             return new ThresholdProximityDescriptor(topologyDescriptorThreshold);
         } else {
             throw new IllegalStateException("Invalid TopologyDescriptor: " + topologyDescriptor);

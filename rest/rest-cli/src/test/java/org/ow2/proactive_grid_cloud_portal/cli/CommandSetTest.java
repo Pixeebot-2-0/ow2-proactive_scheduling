@@ -61,7 +61,7 @@ public class CommandSetTest {
     public void testNbMandatoryArgsMatchesWithDescription() {
 
         // In "submit" and "listjobs" cases nb mandatory args does not match with the description
-        if (entry.argNames() != null && !entry.longOpt().equals("submit") && !entry.longOpt().equals("listjobs")) {
+        if (entry.argNames() != null && !"submit".equals(entry.longOpt()) && !"listjobs".equals(entry.longOpt())) {
             int nbMandatoryArgs = 0;
             String mandatoryArgNames = entry.argNames();
 

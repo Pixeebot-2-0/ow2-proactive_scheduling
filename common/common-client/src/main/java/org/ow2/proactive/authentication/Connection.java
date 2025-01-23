@@ -221,7 +221,7 @@ public abstract class Connection<T extends Authentication> implements Loggable, 
      *          or the given URL, unchanged.
      */
     public static URI normalize(String url) {
-        if (url == null || url.trim().equals("")) {
+        if (url == null || "".equals(url.trim())) {
             try {
                 RemoteObjectFactory rof = AbstractRemoteObjectFactory.getDefaultRemoteObjectFactory();
                 // NO_LOOP_BACK property is handled by getBaseURI()

@@ -52,7 +52,7 @@ public class Logging extends JavaExecutable {
     public Serializable execute(TaskResult... results) throws Throwable {
         CentralPAPropertyRepository.PA_CLASSLOADING_USEHTTP.setValue(false);
 
-        if (this.stream.equals("out")) {
+        if ("out".equals(this.stream)) {
             for (int i = 0; i < numberOfLines; i++) {
                 Thread.sleep(this.sleepTime);
                 getOut().println(MSG);

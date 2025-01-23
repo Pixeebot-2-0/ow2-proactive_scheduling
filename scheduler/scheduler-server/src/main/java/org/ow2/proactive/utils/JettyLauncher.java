@@ -74,7 +74,7 @@ public class JettyLauncher {
             for (int i = 0; i < args.length; i++) {
                 String arg = args[i];
 
-                if (arg.equals("-p")) {
+                if ("-p".equals(arg)) {
                     if (i + 1 == args.length) {
                         error("No port specified for option -p");
                     } else {
@@ -86,7 +86,7 @@ public class JettyLauncher {
                         }
                         i++;
                     }
-                } else if (arg.equals("-l")) {
+                } else if ("-l".equals(arg)) {
                     if (i + 1 == args.length) {
                         error("No file specified for options -l");
                     } else {
@@ -100,7 +100,7 @@ public class JettyLauncher {
                         }
                         i++;
                     }
-                } else if (arg.equals("-h")) {
+                } else if ("-h".equals(arg)) {
                     usage();
                     System.exit(0);
                 } else {

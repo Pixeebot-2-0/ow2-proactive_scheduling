@@ -510,7 +510,7 @@ public abstract class Script<E> implements Serializable {
         if (fetchedInformation != null) {
             return fetchedInformation;
         }
-        if (url.getProtocol().equals("http") || url.getProtocol().equals("https")) {
+        if ("http".equals(url.getProtocol()) || "https".equals(url.getProtocol())) {
             fetchedInformation = fetchScriptUsingHttpDownloader(url);
         } else {
             fetchedInformation = fetchScriptUsingOpenStream(url);

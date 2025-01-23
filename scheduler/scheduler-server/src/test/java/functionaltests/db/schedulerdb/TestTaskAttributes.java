@@ -103,13 +103,13 @@ public class TestTaskAttributes extends BaseSchedulerDBTest {
         Set<String> scripts = new HashSet<>();
         for (SelectionScript script : task.getSelectionScripts()) {
             scripts.add(script.getScript());
-            if (script.getScript().equals("selection1")) {
+            if ("selection1".equals(script.getScript())) {
                 Assert.assertArrayEquals(new String[] { "param1", "param2" }, script.getParameters());
             }
-            if (script.getScript().equals("selection2")) {
+            if ("selection2".equals(script.getScript())) {
                 Assert.assertArrayEquals(new String[] { "param3" }, script.getParameters());
             }
-            if (script.getScript().equals("selection3")) {
+            if ("selection3".equals(script.getScript())) {
                 Assert.assertArrayEquals(new String[] {}, script.getParameters());
             }
         }

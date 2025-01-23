@@ -89,7 +89,7 @@ public class SelectorData {
     }
 
     InputSelector createInputSelector() {
-        if (!type.equals(INPUT_TYPE)) {
+        if (!INPUT_TYPE.equals(type)) {
             throw new IllegalStateException("Not input selector: " + type);
         }
 
@@ -100,7 +100,7 @@ public class SelectorData {
     }
 
     OutputSelector createOutputSelector() {
-        if (!type.equals(OUTPUT_TYPE)) {
+        if (!OUTPUT_TYPE.equals(type)) {
             throw new IllegalStateException("Not output selector: " + type);
         }
 
@@ -114,7 +114,7 @@ public class SelectorData {
         if (type == null) {
             throw new IllegalStateException();
         }
-        return type.equals(INPUT_TYPE);
+        return INPUT_TYPE.equals(type);
     }
 
     @Id

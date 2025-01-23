@@ -172,7 +172,7 @@ public class SelectionManagerTest {
 
             @Override
             public void checkPermission(Permission perm) {
-                if (perm.getName().equals("Identities collection") &&
+                if ("Identities collection".equals(perm.getName()) &&
                     ((PrincipalPermission) perm).hasPrincipal(new UserNamePrincipal("user"))) {
                     throw new SecurityException();
                 }

@@ -122,16 +122,16 @@ public class TestWorkflowIterationAwareness extends SchedulerFunctionalTestNoRes
 
         int n = 4;
         for (Entry<String, TaskResult> result : res.getAllResults().entrySet()) {
-            if (result.getKey().equals("T1")) {
+            if ("T1".equals(result.getKey())) {
                 n--;
                 checkResult(result.getValue().toString(), "T1", "0", "0");
-            } else if (result.getKey().equals("T1*1")) {
+            } else if ("T1*1".equals(result.getKey())) {
                 n--;
                 checkResult(result.getValue().toString(), "T1*1", "0", "1");
-            } else if (result.getKey().equals("T1#1")) {
+            } else if ("T1#1".equals(result.getKey())) {
                 n--;
                 checkResult(result.getValue().toString(), "T1#1", "1", "0");
-            } else if (result.getKey().equals("T1#1*1")) {
+            } else if ("T1#1*1".equals(result.getKey())) {
                 n--;
                 checkResult(result.getValue().toString(), "T1#1*1", "1", "1");
             }
@@ -184,28 +184,28 @@ public class TestWorkflowIterationAwareness extends SchedulerFunctionalTestNoRes
                     throw new IllegalStateException("Operating system not supported");
             }
 
-            if (result.getKey().equals("T1")) {
+            if ("T1".equals(result.getKey())) {
                 n--;
                 File f = new File(path + "0_0");
                 BufferedReader in = new BufferedReader(new FileReader(f));
                 checkResult(BoundedLineReader.readLine(in, 5_000_000), "T1", "0", "0");
                 in.close();
                 f.delete();
-            } else if (result.getKey().equals("T1*1")) {
+            } else if ("T1*1".equals(result.getKey())) {
                 n--;
                 File f = new File(path + "0_1");
                 BufferedReader in = new BufferedReader(new FileReader(f));
                 checkResult(BoundedLineReader.readLine(in, 5_000_000), "T1*1", "0", "1");
                 in.close();
                 f.delete();
-            } else if (result.getKey().equals("T1#1")) {
+            } else if ("T1#1".equals(result.getKey())) {
                 n--;
                 File f = new File(path + "1_0");
                 BufferedReader in = new BufferedReader(new FileReader(f));
                 checkResult(BoundedLineReader.readLine(in, 5_000_000), "T1#1", "1", "0");
                 in.close();
                 f.delete();
-            } else if (result.getKey().equals("T1#1*1")) {
+            } else if ("T1#1*1".equals(result.getKey())) {
                 n--;
                 File f = new File(path + "1_1");
                 BufferedReader in = new BufferedReader(new FileReader(f));
@@ -224,16 +224,16 @@ public class TestWorkflowIterationAwareness extends SchedulerFunctionalTestNoRes
         String[] array = res.split(":");
         for (String str : array) {
             String[] ar = str.split(" ");
-            if (ar[0].equals("arg")) {
-                if (ar[1].equals("it")) {
+            if ("arg".equals(ar[0])) {
+                if ("it".equals(ar[1])) {
                     Assert.assertEquals("Wrong iteration index in arguments for task " + name, it, ar[2]);
-                } else if (ar[1].equals("dup")) {
+                } else if ("dup".equals(ar[1])) {
                     Assert.assertEquals("Wrong replication index in arguments for task " + name, dup, ar[2]);
                 }
-            } else if (ar[0].equals("prop")) {
-                if (ar[1].equals("it")) {
+            } else if ("prop".equals(ar[0])) {
+                if ("it".equals(ar[1])) {
                     Assert.assertEquals("Wrong iteration index in properties for task " + name, it, ar[2]);
-                } else if (ar[1].equals("dup")) {
+                } else if ("dup".equals(ar[1])) {
                     Assert.assertEquals("Wrong replication index in properties for task " + name, dup, ar[2]);
                 }
             }
