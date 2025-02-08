@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.utils;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -159,6 +160,7 @@ public final class ObjectByteConverter {
         //here, input byteArray is uncompressed if needed
         try (ByteArrayInputStream bais = new ByteArrayInputStream(input);
                 ObjectInputStream ois = new ObjectInputStream(bais)) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             return ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Could not uncompress to byte array object: " + e.getMessage(), e);
