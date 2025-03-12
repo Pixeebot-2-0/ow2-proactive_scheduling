@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.scheduler.core.db;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -89,7 +91,7 @@ public class SelectionScriptData {
     SelectionScript createSelectionScript() throws InvalidScriptException {
         if (script == null && url != null) {
             try {
-                return new SelectionScript(new URL(url), getScriptEngine(), parameters(), isSelectionScriptDynamic());
+                return new SelectionScript(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), getScriptEngine(), parameters(), isSelectionScriptDynamic());
             } catch (MalformedURLException e) {
                 throw new InvalidScriptException(e);
             }

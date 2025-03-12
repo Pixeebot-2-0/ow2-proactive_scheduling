@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.resourcemanager.updater;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -147,7 +149,7 @@ public class RMNodeUpdater extends RMNodeStarter {
     private JarStatus isLocalJarUpToDate(String url, String filePath) {
 
         try {
-            URLConnection urlConnection = new URL(url).openConnection();
+            URLConnection urlConnection = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
             File file = new File(filePath);
 
             logger.info("Url date=" + new Date(urlConnection.getLastModified()));
@@ -182,7 +184,7 @@ public class RMNodeUpdater extends RMNodeStarter {
 
     private long getRemoteLastModifiedMillis(String url) {
         try {
-            URLConnection urlConnection = new URL(url).openConnection();
+            URLConnection urlConnection = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
             return urlConnection.getLastModified();
         } catch (IOException e) {
             logError("Error when contacting the remote url " + url, e);
@@ -268,7 +270,7 @@ public class RMNodeUpdater extends RMNodeStarter {
             trustEveryone();
 
         }
-        FileUtils.copyURLToFile(new URL(jarUrl), destination);
+        FileUtils.copyURLToFile(Urls.create(jarUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), destination);
     }
 
     /**

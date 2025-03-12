@@ -26,6 +26,8 @@
 package org.ow2.proactive.resourcemanager.utils;
 
 import io.github.pixee.security.BoundedLineReader;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.ow2.proactive.utils.ClasspathUtils.findSchedulerHome;
 
 import java.io.BufferedReader;
@@ -761,7 +763,7 @@ public class RMNodeStarter {
             // log4j.configuration property is set (to a URL), use its value
             URL url;
             try {
-                url = new URL(log4jConfigPropertyValue);
+                url = Urls.create(log4jConfigPropertyValue, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             } catch (MalformedURLException e) {
                 throw new RuntimeException("Malformed log4j.configuration value: " + log4jConfigPropertyValue, e);
             }
