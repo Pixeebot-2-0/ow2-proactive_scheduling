@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive_grid_cloud_portal.rm;
 
+import java.security.SecureRandom;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -131,7 +132,7 @@ public class RMRestTest extends RestTestServer {
                 sample.setValue(dataSource, EXPECTED_RRD_VALUE);
             }
             sample.update();
-            time += new Random().nextDouble() * 300 + 1;
+            time += new SecureRandom().nextDouble() * 300 + 1;
         }
         return rrdDb;
     }
