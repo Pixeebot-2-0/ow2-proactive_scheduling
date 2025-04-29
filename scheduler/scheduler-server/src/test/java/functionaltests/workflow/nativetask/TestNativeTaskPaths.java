@@ -26,6 +26,7 @@
 package functionaltests.workflow.nativetask;
 
 import java.io.*;
+import java.nio.file.Files;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
@@ -69,12 +70,12 @@ public class TestNativeTaskPaths extends SchedulerFunctionalTestNoRestart {
     @Test
     public void testNativeTaskPaths() throws Throwable {
 
-        File in = File.createTempFile("input", "space");
+        File in = Files.createTempFile("input", "space").toFile();
         in.delete();
         in.mkdir();
         String inPath = in.getAbsolutePath();
 
-        File out = File.createTempFile("output", "space");
+        File out = Files.createTempFile("output", "space").toFile();
         out.delete();
         out.mkdir();
 

@@ -3095,7 +3095,7 @@ public class SchedulerDBManager {
 
             Configuration configuration = new Configuration();
 
-            File modifiedFile = File.createTempFile("dbconfig", "tmp");
+            File modifiedFile = Files.createTempFile("dbconfig", "tmp").toFile();
             try {
                 FileToBytesConverter.convertByteArrayToFile(configContent.getBytes(), modifiedFile);
 

@@ -110,7 +110,7 @@ public class FileUtils {
         int nbTries = 0;
         do {
             //create new generated temp file name
-            File newdir = File.createTempFile(prefix, suffix, directory);
+            File newdir = Files.createTempFile(directory.toPath(), prefix, suffix).toFile();
             //remove it
             if (newdir.delete()) {
                 //if success, create a dir with the same name

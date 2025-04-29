@@ -29,6 +29,7 @@ import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -109,7 +110,7 @@ public abstract class HostsFileBasedInfrastructureManager extends Infrastructure
         int index = 0;
         try {
             byte[] bytes = (byte[]) parameters[index++];
-            this.hostsList = File.createTempFile("hosts", "list");
+            this.hostsList = Files.createTempFile("hosts", "list").toFile();
             FileToBytesConverter.convertByteArrayToFile(bytes, this.hostsList);
             readHosts(this.hostsList);
             this.hostsList.delete();

@@ -25,6 +25,7 @@
  */
 package org.ow2.proactive.scripting;
 
+import java.nio.file.Files;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -64,7 +65,7 @@ public class ScriptTest {
 
     @Test
     public void testScriptCanBeCreatedWithoutScriptEngines_Script_File() throws Exception {
-        ScriptForTests script = new ScriptForTests(File.createTempFile("script", ".blahblah"));
+        ScriptForTests script = new ScriptForTests(Files.createTempFile("script", ".blahblah").toFile());
 
         assertNull(script.createScriptEngine());
 
@@ -75,7 +76,7 @@ public class ScriptTest {
 
     @Test
     public void testScriptCanBeCreatedWithoutScriptEngines_Script_URL() throws Exception {
-        ScriptForTests script = new ScriptForTests(File.createTempFile("script", ".blahblah").toURI().toURL(),
+        ScriptForTests script = new ScriptForTests(Files.createTempFile("script", ".blahblah").toFile().toURI().toURL(),
                                                    null,
                                                    true);
 
@@ -88,7 +89,7 @@ public class ScriptTest {
 
     @Test
     public void testScriptCanBeCreatedWithoutScriptEngines_Script_URL_WrongEngine() throws Exception {
-        ScriptForTests script = new ScriptForTests(File.createTempFile("script", ".blahblah").toURI().toURL(),
+        ScriptForTests script = new ScriptForTests(Files.createTempFile("script", ".blahblah").toFile().toURI().toURL(),
                                                    "neverheardofthis",
                                                    true);
 
@@ -101,7 +102,7 @@ public class ScriptTest {
 
     @Test
     public void testScriptURLInferEngineName() throws Exception {
-        ScriptForTests script = new ScriptForTests(File.createTempFile("script", ".groovy").toURI().toURL(),
+        ScriptForTests script = new ScriptForTests(Files.createTempFile("script", ".groovy").toFile().toURI().toURL(),
                                                    null,
                                                    true);
 
@@ -110,7 +111,7 @@ public class ScriptTest {
 
     @Test
     public void testScriptURLOverrideEngineName() throws Exception {
-        ScriptForTests script = new ScriptForTests(File.createTempFile("script", ".groovy").toURI().toURL(),
+        ScriptForTests script = new ScriptForTests(Files.createTempFile("script", ".groovy").toFile().toURI().toURL(),
                                                    "javascript",
                                                    true);
 
@@ -120,7 +121,7 @@ public class ScriptTest {
     @Test
     public void testScriptURL_FetchLately() throws Exception {
         String scriptContent = "result = \"Hello World\"";
-        File scriptFile = File.createTempFile("script", ".groovy");
+        File scriptFile = Files.createTempFile("script", ".groovy").toFile();
         try (PrintWriter out = new PrintWriter(scriptFile)) {
             out.println(scriptContent);
         }
@@ -162,7 +163,7 @@ public class ScriptTest {
 
     @Test
     public void testJavaScriptEngine_Script_File() throws Exception {
-        SimpleScript script = new SimpleScript(File.createTempFile("script", ".js"), new String[0]);
+        SimpleScript script = new SimpleScript(Files.createTempFile("script", ".js").toFile(), new String[0]);
 
         assertNotNull(script.createScriptEngine());
 

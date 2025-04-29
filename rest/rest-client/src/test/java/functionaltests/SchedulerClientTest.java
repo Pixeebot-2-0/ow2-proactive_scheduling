@@ -27,6 +27,7 @@ package functionaltests;
 
 import static functionaltests.RestFuncTHelper.getRestServerUrl;
 import static functionaltests.jobs.SimpleJob.TEST_JOB;
+import java.nio.file.Files;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Matchers.anyMap;
 
@@ -789,7 +790,7 @@ public class SchedulerClientTest extends AbstractRestFuncTestCase {
 
     @Test(timeout = MAX_WAIT_TIME)
     public void testPushPullDeleteEmptyFile() throws Exception {
-        File emptyFile = File.createTempFile("emptyFile", ".tmp");
+        File emptyFile = Files.createTempFile("emptyFile", ".tmp").toFile();
         ISchedulerClient client = clientInstance();
         // Push the empty file into the userspace
         client.pushFile("USERSPACE", "", emptyFile.getName(), emptyFile.getCanonicalPath());
