@@ -26,6 +26,7 @@
 package org.ow2.proactive_grid_cloud_portal.scheduler.client.utils;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import io.github.pixee.security.ZipSecurity;
 
 import java.io.*;
 import java.net.URI;
@@ -197,7 +198,7 @@ public class Zipper {
         public static void unzip(InputStream is, File outFile) throws IOException {
             Closer closer = Closer.create();
             try {
-                ZipInputStream zis = new ZipInputStream(is);
+                ZipInputStream zis = ZipSecurity.createHardenedInputStream(is);
                 closer.register(zis);
 
                 ZipEntry zipEntry = zis.getNextEntry();
