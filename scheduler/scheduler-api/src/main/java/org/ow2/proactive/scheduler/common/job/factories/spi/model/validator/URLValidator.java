@@ -25,6 +25,8 @@
  */
 package org.ow2.proactive.scheduler.common.job.factories.spi.model.validator;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -42,7 +44,7 @@ public class URLValidator implements Validator<String> {
     public String validate(String parameterValue, ModelValidatorContext context, boolean isVariableHidden)
             throws ValidationException {
         try {
-            return new URL(parameterValue).toString();
+            return Urls.create(parameterValue, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString();
         } catch (MalformedURLException e) {
             throw new ValidationException(parameterValue + " is not a valid URL.", e);
         }
