@@ -26,6 +26,7 @@
 package org.ow2.proactive_grid_cloud_portal.scheduler;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import java.nio.file.Files;
 import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
 import static org.ow2.proactive.scheduler.common.SchedulerConstants.METADATA_CONTENT_TYPE;
 import static org.ow2.proactive.scheduler.common.SchedulerConstants.METADATA_FILE_EXTENSION;
@@ -1691,14 +1692,14 @@ public class SchedulerStateRest implements SchedulerRestInterface {
         Scheduler s = checkAccess(sessionId, "submitflat");
 
         try {
-            File command = File.createTempFile("flatsubmit_commands_", ".txt");
+            File command = Files.createTempFile("flatsubmit_commands_", ".txt").toFile();
             command.deleteOnExit();
 
             String selectionPath = null;
             File selection = null;
 
             if (selectionScriptContent != null && selectionScriptContent.trim().length() > 0) {
-                selection = File.createTempFile("flatsubmit_selection_", "." + selectionScriptExtension);
+                selection = Files.createTempFile("flatsubmit_selection_", "." + selectionScriptExtension).toFile();
                 selection.deleteOnExit();
                 try (PrintWriter pw = new PrintWriter(new FileOutputStream(selection))) {
                     pw.print(selectionScriptContent);
@@ -3092,7 +3093,7 @@ public class SchedulerStateRest implements SchedulerRestInterface {
                                       });
 
             // Write job to file
-            tmpFile = File.createTempFile("valid-job", "d");
+            tmpFile = Files.createTempFile("valid-job", "d").toFile();
             Map<String, String> jobVariables;
             try (OutputStream outputStream = new FileOutputStream(tmpFile)) {
                 IOUtils.copy(is, outputStream);
@@ -3135,7 +3136,7 @@ public class SchedulerStateRest implements SchedulerRestInterface {
             url = replaceCatalogUrl(url);
             SchedulerSpaceInterface space = getSpaceInterface(sessionId);
             String jobXml = downloadWorkflowContent(sessionId, url);
-            tmpWorkflowFile = File.createTempFile("job", "d");
+            tmpWorkflowFile = Files.createTempFile("job", "d").toFile();
             Map<String, String> jobVariables;
             try (OutputStream outputStream = new FileOutputStream(tmpWorkflowFile)) {
                 IOUtils.write(jobXml, outputStream, Charset.forName(FILE_ENCODING));
@@ -3173,7 +3174,7 @@ public class SchedulerStateRest implements SchedulerRestInterface {
             url = replaceCatalogUrl(url);
             SchedulerSpaceInterface space = getSpaceInterface(sessionId);
             String jobXml = downloadWorkflowContent(sessionId, url);
-            tmpWorkflowFile = File.createTempFile("job", "d");
+            tmpWorkflowFile = Files.createTempFile("job", "d").toFile();
             Map<String, String> jobVariables;
             try (OutputStream outputStream = new FileOutputStream(tmpWorkflowFile)) {
                 IOUtils.write(jobXml, outputStream, Charset.forName(FILE_ENCODING));
@@ -3204,7 +3205,7 @@ public class SchedulerStateRest implements SchedulerRestInterface {
             url = replaceCatalogUrl(url);
             SchedulerSpaceInterface space = getSpaceInterface(sessionId);
             String jobXml = downloadWorkflowContent(sessionId, url);
-            tmpWorkflowFile = File.createTempFile("job", "d");
+            tmpWorkflowFile = Files.createTempFile("job", "d").toFile();
             Map<String, String> jobVariables;
             try (OutputStream outputStream = new FileOutputStream(tmpWorkflowFile)) {
                 IOUtils.write(jobXml, outputStream, Charset.forName(FILE_ENCODING));

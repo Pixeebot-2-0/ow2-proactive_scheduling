@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -368,7 +369,7 @@ public class JobEmailNotification {
             String allRes = String.join(System.lineSeparator(),
                                         resStream.filter(r -> r != null).collect(Collectors.toList()));
 
-            File file = File.createTempFile("job_logs", ".txt");
+            File file = Files.createTempFile("job_logs", ".txt").toFile();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(allRes);
                 attachLogPath = file.getAbsolutePath();

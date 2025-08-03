@@ -35,6 +35,7 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -337,7 +338,7 @@ public class SelectionUtils {
         File tmp = null;
         try {
             InputStream is = SelectionUtils.class.getResourceAsStream(winTestCuda);
-            tmp = File.createTempFile("wcuda", ".exe");
+            tmp = Files.createTempFile("wcuda", ".exe").toFile();
             FileOutputStream fos = new FileOutputStream(tmp);
             //copy
             byte[] buf = new byte[1024];
