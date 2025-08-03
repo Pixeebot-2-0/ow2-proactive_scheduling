@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.util.StringTokenizer;
 
 import org.ow2.proactive.resourcemanager.nodesource.common.Configurable;
@@ -61,7 +62,7 @@ public class GenericBatchJobInfrastructure extends BatchJobInfrastructure {
         try {
 
             //create dir for tmp classpath
-            File f = File.createTempFile("BatchJobClassDir", "GENERATED");
+            File f = Files.createTempFile("BatchJobClassDir", "GENERATED").toFile();
             f.delete();
             f.mkdir();
             f.deleteOnExit();

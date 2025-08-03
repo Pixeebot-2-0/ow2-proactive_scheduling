@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -114,7 +115,7 @@ public final class MBeanInfoViewer {
     public static String rrdContent(byte[] rrd4j, String newRange, String[] dataSources, String function)
             throws IOException {
 
-        File rrd4jDb = File.createTempFile("database", "rr4dj");
+        File rrd4jDb = Files.createTempFile("database", "rr4dj").toFile();
         // construct the JSON response directly in a String
         StringBuilder result = new StringBuilder();
         try {

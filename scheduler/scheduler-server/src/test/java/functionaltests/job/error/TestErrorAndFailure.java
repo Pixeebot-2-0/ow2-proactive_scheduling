@@ -26,6 +26,7 @@
 package functionaltests.job.error;
 
 import static functionaltests.utils.SchedulerTHelper.log;
+import java.nio.file.Files;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -182,7 +183,7 @@ public class TestErrorAndFailure extends SchedulerFunctionalTestNoRestart {
         submittedJob.setMaxNumberOfExecution(1);
         submittedJob.setOnTaskError(pauseTaskPolicy ? OnTaskError.PAUSE_TASK : OnTaskError.PAUSE_JOB);
 
-        File groovyScriptFile = File.createTempFile("inerrorTask", ".groovy");
+        File groovyScriptFile = Files.createTempFile("inerrorTask", ".groovy").toFile();
         FileUtils.writeStringToFile(groovyScriptFile, inerror_groovy_script, StandardCharsets.UTF_8.toString());
         ScriptTask taskInError = new ScriptTask();
         final String errorTaskName = "errorTask";
